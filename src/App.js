@@ -30,12 +30,13 @@ handleSubmit = (e, firstName, lastName, email, creditCard, zipCode) => {
   } else {
     alert(`Purchase complete! You will be charged ${this.state.total}`)
   }
-  
+ 
 }
 
 
-handleAddToCart = (name, price) => {
-  
+handleAddToCart = (e, name, price) => {
+  e.preventDefault();
+  console.log("trigger")
   this.setState ({
     selectedProductList: [...this.state.selectedProductList, {"name":name, "price":price}],
     subtotal: this.state.subtotal + price,
@@ -53,8 +54,13 @@ handleAddToCart = (name, price) => {
                         <h2>My Garage Sale</h2>
                         <h3 >{name}</h3>
                         <div>Price: {formatPrice(price)}</div>
-                        <button onClick={()=>this.handleAddToCart(name, price)}>Add To Cart</button>
+                        <br />
+                        <button onClick={(e)=>this.handleAddToCart(e, name, price)}>Add To Cart</button>
+                        <br />
+                        <br />
                         <img src={img} alt={name} />
+                        <br />
+                        <br />
                         <div>{description}</div>
                     </form>
                 </div>
@@ -62,11 +68,11 @@ handleAddToCart = (name, price) => {
         })
 
         let selectedProductInfo = this.state.selectedProductList.map((selectedProduct,i) => {
-          return <li key={selectedProduct.name+i}>{selectedProduct.name}: {selectedProduct.price}</li>
+          return <li key={selectedProduct.name+i}>{selectedProduct.name}: {formatPrice(selectedProduct.price)}</li>
         })
 
     return (
-      <div id="products">
+      <div>
         {allProductInfo }
         <div id="shopping-cart">
           <h2>Cart</h2>

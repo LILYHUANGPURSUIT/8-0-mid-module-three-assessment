@@ -1,1 +1,14 @@
+.products {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    background-color: blueviolet;
+}
 
+#shopping-cart{
+    display: inline;
+    background-color: chartreuse;
+}
+
+#checkout{
+    background-color: coral;
+}
