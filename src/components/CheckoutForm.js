@@ -13,27 +13,63 @@ class CheckoutForm extends React.Component{
         }
     }
 
-    handleCheckout = (event) =>{
-        event.preventDefualt();
-
+    handleUserInput = (e) => {
+        this.setState ({
+            [e.target.name]: e.target.value,
+        })
+        // console.log(e.target.name)
     }
 
-    render(){
-        return (
-            <form>
-                <h2>Checkout Form</h2>
-                <label>First Name</label>
-                <input type="text"></input>
-                <label>Last Name</label>
-                <input type="text"></input>
-                <label>Email</label>
-                <input type="email"></input>
-                <label>Credit Card</label>
-                <input type="number"></input>
-                <label>Zip Code</label>
-                <input type="number"></input>
 
-                {/* <button type="submit" onSubmit="handleCheckout">buy now</button> */}
+
+    render(){
+        let {firstName, lastName, email, creditCard, zipCode} = this.state;
+        return (
+            <form id="checkout" onSubmit={(e)=>this.props.handleSubmit(e, firstName, lastName, email, creditCard, zipCode)}>
+                <h2>Checkout Form</h2>
+                <label htmlFor = "first-name">First Name</label>
+                <input 
+                    onInput={this.handleUserInput}
+                    type="text"
+                    value={this.state.firstName}
+                    name="firstName"
+                    id="first-name">
+                </input>
+                <label htmlFor = "last-name">Last Name</label>
+                <input 
+                    onInput={this.handleUserInput}
+                    type="text"
+                    value={this.state.lastName}
+                    name="lastName"
+                    id="last-name">
+                </input>
+                <label htmlFor = "email">Email</label>
+                <input 
+                    onInput={this.handleUserInput}
+                    type="email"
+                    value={this.state.email}
+                    name="email"
+                    id="email">
+                </input>
+                <label htmlFor = "credit-card">Credit Card</label>
+                <input 
+                    onInput={this.handleUserInput}
+                    type="number"
+                    value={this.state.creditCard}
+                    name="creditCard"
+                    id="credit-card">
+                </input>
+                <label htmlFor = "zip-code">Zip Code</label>
+                <input 
+                    onInput={this.handleUserInput}
+                    type="number"
+                    value={this.state.zipCode}
+                    name="zipCode"
+                    id="zip-code">
+                </input>
+                
+
+                <button type="submit">Buy Now</button>
             </form>
         )
     }
