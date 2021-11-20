@@ -28,7 +28,7 @@ handleSubmit = (e, firstName, lastName, email, creditCard, zipCode) => {
   } else if (zipCode.length !== 5){
     alert("Zip code is not valid")
   } else {
-    alert(`Purchase complete! You will be charged ${this.state.total}`)
+    alert(`Purchase complete! You will be charged ${formatPrice(this.state.total)}`)
   }
  
 }
@@ -55,7 +55,7 @@ handleAddToCart = (e, name, price) => {
                         <h3 >{name}</h3>
                         <div>Price: {formatPrice(price)}</div>
                         <br />
-                        <button onClick={(e)=>this.handleAddToCart(e, name, price)}>Add To Cart</button>
+                        <button type="submit" onClick={(e)=>this.handleAddToCart(e, name, price)}>Add To Cart</button>
                         <br />
                         <br />
                         <img src={img} alt={name} />
@@ -72,16 +72,16 @@ handleAddToCart = (e, name, price) => {
         })
 
     return (
-      <div>
-        {allProductInfo }
+      <div className="product">
+        <div>{allProductInfo }</div>
         <div id="shopping-cart">
           <h2>Cart</h2>
           <ul>{selectedProductInfo}</ul>
           <h3>Subtotal: {formatPrice(this.state.subtotal)}</h3>
           <h3>Tax: {formatPrice(this.state.tax)}</h3>
           <h3>Total: {formatPrice(this.state.total)}</h3>
+          <CheckoutForm handleSubmit={this.handleSubmit}/>
         </div>
-        <CheckoutForm hanleSubmit={this.handleSubmit}/>
       </div>
     )
   }
